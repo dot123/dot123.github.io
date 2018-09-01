@@ -3,15 +3,73 @@
 
 
     
+  <url>
+    <loc>http://www.dot123.vip/posts/26463/</loc>
+    <lastmod>2018-09-01T10:30:56.685Z</lastmod>
+    <data>
+        <display>
+        <title>lua-bindings环境配置</title>
+        <pubTime>2016-03-01T09:45:55.000Z</pubTime>
+        
+        <tag>lua-bindings</tag>
+         
+         
+           
+             
+              <breadCrumb title="cocos2dx" url="http://www.dot123.vip/categories/cocos2dx/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
+  <url>
+    <loc>http://www.dot123.vip/posts/4710/</loc>
+    <lastmod>2018-09-01T10:30:32.589Z</lastmod>
+    <data>
+        <display>
+        <title>VS2015自动添加头部注释</title>
+        <pubTime>2016-03-01T09:00:31.000Z</pubTime>
+        
+        <tag>vs2015</tag>
+         
+         
+           
+             
+              <breadCrumb title="Unity" url="http://www.dot123.vip/categories/Unity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.dot123.vip/posts/5316/</loc>
+    <lastmod>2018-09-01T10:17:33.354Z</lastmod>
+    <data>
+        <display>
+        <title>cocos2dx-lua集成sproto</title>
+        <pubTime>2016-03-01T10:01:30.000Z</pubTime>
+        
+        <tag>sproto</tag>
+         
+         
+           
+             
+              <breadCrumb title="cocos2dx" url="http://www.dot123.vip/categories/cocos2dx/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://www.dot123.vip/posts/25106/</loc>
-    <lastmod>2016-03-10T14:38:20.000Z</lastmod>
+    <lastmod>2018-09-01T10:15:30.029Z</lastmod>
     <data>
         <display>
         <title>cocos2dx中随机数生成的各种方法比较</title>
-        <pubTime>2016-03-10T14:37:20.000Z</pubTime>
+        <pubTime>2016-02-25T14:37:20.000Z</pubTime>
         
         <tag>cocos2dx</tag>
          
@@ -24,6 +82,8 @@
     </data>
     </url>
 
+    
+    
     
   <url>
     <loc>http://www.dot123.vip/posts/65318/</loc>

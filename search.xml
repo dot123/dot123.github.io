@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[cocos2dx-lua集成sproto]]></title>
+    <url>%2Fposts%2F5316%2F</url>
+    <content type="text"><![CDATA[在cocos2d-x/external/lua 目录下新建四个文件夹sproto,bitop,lpeg,lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; LUALIB_API int luaopen_bit(lua_State *L); #if __cplusplus } #endif #endif 在lpeg中建立一个lpeg.h文件，内容如下: #ifndef __LUA_LPEG_H_ #define __LUA_LPEG_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lpeg/lptypes.h&quot; #include &quot;lpeg/lpcap.h&quot; #include &quot;lpeg/lpcode.h&quot; #include &quot;lpeg/lpprint.h&quot; #include &quot;lpeg/lptree.h&quot; #include &quot;lpeg/lpvm.h&quot; int luaopen_lpeg(lua_State *L); #if __cplusplus } #endif #endif 在sproto中建立一个lsproto.h文件，内容如下: #ifndef __LUA_LSPROTO_H_ #define __LUA_LSPROTO_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_sproto_core(lua_State *L); #if __cplusplus } #endif #endif 在lpack中建立一个lpack.h文件，内容如下: #ifndef __LUA_LPACK_H_ #define __LUA_LPACK_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_pack(lua_State *L); #if __cplusplus } #endif #endif 在cocos2d-x/cocos/scripting/lua-bindings/manual目录下，找到 lua_extensions.c 文件。在头部包含所需文件。 #include &quot;sproto/lsproto.h&quot; #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) #include &quot;bitop/bit.h&quot; #endif #include &quot;lpeg/lpeg.h&quot; #include &quot;lpack/lpack.h&quot; 在luax_exts内，加入下列几行。 { &quot;sproto.core&quot;, luaopen_sproto_core }, #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) { &quot;bit&quot;, luaopen_bit }, #endif { &quot;lpeg&quot;, luaopen_lpeg }, { &quot;string&quot;, luaopen_pack }, Android支持 在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件 ../../../../external/lua/lpeg/lpcap.c \ ../../../../external/lua/lpeg/lpcode.c \ ../../../../external/lua/lpeg/lpprint.c \ ../../../../external/lua/lpeg/lptree.c \ ../../../../external/lua/lpeg/lpvm.c \ ../../../../external/lua/sproto/lsproto.c \ ../../../../external/lua/sproto/sproto.c \ ../../../../external/lua/lpack/lpack.c Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误。 总得来说还是很简单的，只需三步： 文件放到cocos2d-x/external/lua目录下 修改lua_extensions.c，包含相关文件 修改Android.mk做Android支持 项目代码https://github.com/dot123/cocos2d-lua-sproto]]></content>
+      <categories>
+        <category>cocos2dx</category>
+      </categories>
+      <tags>
+        <tag>sproto</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lua-bindings环境配置]]></title>
+    <url>%2Fposts%2F26463%2F</url>
+    <content type="text"><![CDATA[1.下载python2.7(win32)安装它并设置C:\Python27\到path环境变量中。 2.安装easy_install使用ez_setup.py(http://peak.telecommunity.com/dist/ez_setup.py)进行安装。下载完成后双击执行安装文件，即可在C:\Python27\scripts下安装easy_install。添加C:\Python27\scripts到环境变量path中。打开cmd执行下面命令：1easy_install virtualenv 安装了easy_install之后安装python的库就很简单了，以后需要安装python的库的话则直接在命令行使用easy_install + libname 3.安装cheetah自动安装：打开cmd执行下面命令：1easy_install cheetah 手动安装:下载Cheetah-2.4.4.tar.zip并解压到C:\Python27\Lib\site-packages然后进入C:\Python27\Lib\site-packages\Cheetah-2.4.4目录，命令行运行: python setup.py install 4.从http://pyyaml.org/download/pyyaml/PyYAML-3.12.win32-py2.7.exe下载pyyaml并安装它。 5.下载android-ndk-r10d(https://developer.android.com/ndk/downloads/index.html)并设置NDK_ROOT环境变量。]]></content>
+      <categories>
+        <category>cocos2dx</category>
+      </categories>
+      <tags>
+        <tag>lua-bindings</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[VS2015自动添加头部注释]]></title>
+    <url>%2Fposts%2F4710%2F</url>
+    <content type="text"><![CDATA[让VS自动生成类的头部注释，只需修改C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\ItemTemplatesCache\CSharp\Code\2052\Class路径下的Class.cs文件示例如下：12345678910111213141516171819202122#region 模块信息/*----------------------------------------------------------------// 模块名：$safeitemname$// 创建者：conjurer// 修改者列表：// 创建日期：$time$// 模块描述：//----------------------------------------------------------------*/#endregionusing System;using System.Collections.Generic;$if$ ($targetframeworkversion$ &gt;= 3.5)using System.Linq;$endif$$if$ ($targetframeworkversion$ &gt;= 4.5)using System.Threading.Tasks;$endif$namespace Dot123&#123; public class $safeitemrootname$ &#123; &#125;&#125;]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>vs2015</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[cocos2dx中随机数生成的各种方法比较]]></title>
     <url>%2Fposts%2F25106%2F</url>
-    <content type="text"><![CDATA[测试代码如下：#define RANGE 200 //1. //随机效果一般，每次进入游戏的时候，值都是一样的 float randData = CCRANDOM_0_1() * RANGE; CCLOG(&quot;1st-------------&gt;%f&quot;, randData); //2. //随机效果不好，虽然每次进入游戏，值都不一样，但是生成的随机数是递增的，而且相邻两个数之间的变化不大 srand(unsigned(time(NULL))); randData = rand() % RANGE; CCLOG(&quot;2rd-------------&gt;%f&quot;, randData); //3. //随机效果较好，每次进入游戏的值都不一样，生成的随机数无规律，相邻的两个数变化较大 timeval tv; cocos2d::gettimeofday(&amp;tv, NULL); unsigned long int seed = tv.tv_sec * 1000 + tv.tv_usec / 1000; srand(seed); randData = rand() % RANGE; CCLOG(&quot;3nd-------------&gt;%f&quot;, randData); //4. //C++11的特性，要包含头文件&lt;random&gt;，随机效果不错 std::uniform_real_distribution&lt;double&gt; u(0, RANGE); std::default_random_engine e(rand()); for (int i = 0; i &lt; 5; i++) { CCLOG(&quot;4th-------------&gt;%f&quot;, u(e)); }]]></content>
+    <content type="text"><![CDATA[测试代码如下：12345678910111213141516171819202122232425262728#define RANGE 200//1.//随机效果一般，每次进入游戏的时候，值都是一样的float randData = CCRANDOM_0_1() * RANGE;CCLOG(&quot;1st-------------&gt;%f&quot;, randData);//2.//随机效果不好，虽然每次进入游戏，值都不一样，但是生成的随机数是递增的，而且相邻两个数之间的变化不大srand(unsigned(time(NULL)));randData = rand() % RANGE;CCLOG(&quot;2rd-------------&gt;%f&quot;, randData);//3.//随机效果较好，每次进入游戏的值都不一样，生成的随机数无规律，相邻的两个数变化较大timeval tv;cocos2d::gettimeofday(&amp;tv, NULL);unsigned long int seed = tv.tv_sec * 1000 + tv.tv_usec / 1000;srand(seed);randData = rand() % RANGE;CCLOG(&quot;3nd-------------&gt;%f&quot;, randData);//4.//C++11的特性，要包含头文件&lt;random&gt;，随机效果不错std::uniform_real_distribution&lt;double&gt; u(0, RANGE);std::default_random_engine e(rand());for (int i = 0; i &lt; 5; i++)&#123; CCLOG(&quot;4th-------------&gt;%f&quot;, u(e));&#125;]]></content>
       <categories>
         <category>cocos2dx</category>
       </categories>
