@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://www.dot123.vip/posts/25106/</loc>
+    <lastmod>2018-09-01T10:59:05.120Z</lastmod>
+    <data>
+        <display>
+        <title>cocos2dx中随机数生成的各种方法比较</title>
+        <pubTime>2016-02-25T14:37:20.000Z</pubTime>
+        
+        <tag>cocos2dx</tag>
+         
+         
+           
+             
+              <breadCrumb title="cocos2dx" url="http://www.dot123.vip/categories/cocos2dx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.dot123.vip/posts/26463/</loc>
-    <lastmod>2018-09-01T10:50:02.839Z</lastmod>
+    <lastmod>2018-09-01T10:56:06.208Z</lastmod>
     <data>
         <display>
         <title>lua-bindings环境配置</title>
@@ -57,26 +77,6 @@
            
              
               <breadCrumb title="Unity" url="http://www.dot123.vip/categories/Unity/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.dot123.vip/posts/25106/</loc>
-    <lastmod>2018-09-01T10:15:30.029Z</lastmod>
-    <data>
-        <display>
-        <title>cocos2dx中随机数生成的各种方法比较</title>
-        <pubTime>2016-02-25T14:37:20.000Z</pubTime>
-        
-        <tag>cocos2dx</tag>
-         
-         
-           
-             
-              <breadCrumb title="cocos2dx" url="http://www.dot123.vip/categories/cocos2dx/"/>
           
         </display>
     </data>
