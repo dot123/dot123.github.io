@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.dot123.vip/posts/26463/</loc>
+    <lastmod>2018-09-02T06:38:36.084Z</lastmod>
+    <data>
+        <display>
+        <title>lua-bindings环境配置</title>
+        <pubTime>2016-03-01T09:45:55.000Z</pubTime>
+        
+        <tag>lua-bindings</tag>
+         
+         
+           
+             
+              <breadCrumb title="cocos2dx" url="http://www.dot123.vip/categories/cocos2dx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.dot123.vip/posts/4710/</loc>
     <lastmod>2018-09-02T06:26:19.015Z</lastmod>
     <data>
@@ -52,26 +72,6 @@
         <pubTime>2016-02-25T14:37:20.000Z</pubTime>
         
         <tag>cocos2dx</tag>
-         
-         
-           
-             
-              <breadCrumb title="cocos2dx" url="http://www.dot123.vip/categories/cocos2dx/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.dot123.vip/posts/26463/</loc>
-    <lastmod>2018-09-01T10:56:06.208Z</lastmod>
-    <data>
-        <display>
-        <title>lua-bindings环境配置</title>
-        <pubTime>2016-03-01T09:45:55.000Z</pubTime>
-        
-        <tag>lua-bindings</tag>
          
          
            
