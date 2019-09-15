@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[开发中的一些实用脚本工具]]></title>
+    <url>%2Fposts%2F32593%2F</url>
+    <content type="text"><![CDATA[1.cocos-sublime是cocosLua快速编译和启动。 2.ClearVS.bat是快速清理VS中间文件。 3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。 4.DeleteGitFoldes.reg是快速清理git版本控制文件。 5.DeleteSvnFoldes.reg是快速清理svn版本控制文件。 6.icon大小转换.js是ps插件可以快速生成各种尺寸的图标。 7.图片压缩工具相关的下载链接。 8.build-mipsle.sh在linux环境下编译mipsle架构cpu可执行文件。 9.mysql快速安装和卸载等相关。 10.mongodb快速安装和卸载等相关。 项目代码https://github.com/dot123/Utilities.git]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>脚本工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Excel导表工具]]></title>
+    <url>%2Fposts%2F55894%2F</url>
+    <content type="text"><![CDATA[1.excel导表工具支持导出txt、lua、json文件。 2.参考Demo.xlsx自动转换字段类型[1,2,3]则导出对应文件格式的数组、数字导出数字、字符串导出字符串。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 项目代码https://github.com/dot123/excelTool.git]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>Excel导表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CocosCreator帧同步]]></title>
+    <url>%2Fposts%2F3013%2F</url>
+    <content type="text"><![CDATA[浮点数处理1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 754标准,因此0.1+0.2=0.30000000000000004不必特殊处理。 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库,要使用查表法。 3.使用确定性随机数。 4.截断小数位数(不是必须的)。]]></content>
+      <categories>
+        <category>CocosCreator</category>
+      </categories>
+      <tags>
+        <tag>帧同步</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[cocos2dx-lua集成sproto]]></title>
     <url>%2Fposts%2F5316%2F</url>
-    <content type="text"><![CDATA[在cocos2d-x/external/lua目录下新建四个文件夹sproto,bitop,lpeg,lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; LUALIB_API int luaopen_bit(lua_State *L); #if __cplusplus } #endif #endif 在lpeg中建立一个lpeg.h文件，内容如下: #ifndef __LUA_LPEG_H_ #define __LUA_LPEG_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lpeg/lptypes.h&quot; #include &quot;lpeg/lpcap.h&quot; #include &quot;lpeg/lpcode.h&quot; #include &quot;lpeg/lpprint.h&quot; #include &quot;lpeg/lptree.h&quot; #include &quot;lpeg/lpvm.h&quot; int luaopen_lpeg(lua_State *L); #if __cplusplus } #endif #endif 在sproto中建立一个lsproto.h文件，内容如下: #ifndef __LUA_LSPROTO_H_ #define __LUA_LSPROTO_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_sproto_core(lua_State *L); #if __cplusplus } #endif #endif 在lpack中建立一个lpack.h文件，内容如下: #ifndef __LUA_LPACK_H_ #define __LUA_LPACK_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_pack(lua_State *L); #if __cplusplus } #endif #endif 在cocos2d-x/cocos/scripting/lua-bindings/manual目录下，找到lua_extensions.c文件在头部包含所需文件 #include &quot;sproto/lsproto.h&quot; #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) #include &quot;bitop/bit.h&quot; #endif #include &quot;lpeg/lpeg.h&quot; #include &quot;lpack/lpack.h&quot; 在luax_exts内，加入下列几行。 { &quot;sproto.core&quot;, luaopen_sproto_core }, #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) { &quot;bit&quot;, luaopen_bit }, #endif { &quot;lpeg&quot;, luaopen_lpeg }, { &quot;string&quot;, luaopen_pack }, Android支持 在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件 ../../../../external/lua/lpeg/lpcap.c \ ../../../../external/lua/lpeg/lpcode.c \ ../../../../external/lua/lpeg/lpprint.c \ ../../../../external/lua/lpeg/lptree.c \ ../../../../external/lua/lpeg/lpvm.c \ ../../../../external/lua/sproto/lsproto.c \ ../../../../external/lua/sproto/sproto.c \ ../../../../external/lua/lpack/lpack.c Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误 总得来说还是很简单的，只需三步： 文件放到cocos2d-x/external/lua目录下 修改lua_extensions.c，包含相关文件 修改Android.mk做Android支持 项目代码https://github.com/dot123/cocos2d-lua-sproto]]></content>
+    <content type="text"><![CDATA[在cocos2d-x/external/lua目录下新建四个文件夹sproto,bitop,lpeg,lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; LUALIB_API int luaopen_bit(lua_State *L); #if __cplusplus } #endif #endif 在lpeg中建立一个lpeg.h文件，内容如下: #ifndef __LUA_LPEG_H_ #define __LUA_LPEG_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lpeg/lptypes.h&quot; #include &quot;lpeg/lpcap.h&quot; #include &quot;lpeg/lpcode.h&quot; #include &quot;lpeg/lpprint.h&quot; #include &quot;lpeg/lptree.h&quot; #include &quot;lpeg/lpvm.h&quot; int luaopen_lpeg(lua_State *L); #if __cplusplus } #endif #endif 在sproto中建立一个lsproto.h文件，内容如下: #ifndef __LUA_LSPROTO_H_ #define __LUA_LSPROTO_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_sproto_core(lua_State *L); #if __cplusplus } #endif #endif 在lpack中建立一个lpack.h文件，内容如下: #ifndef __LUA_LPACK_H_ #define __LUA_LPACK_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_pack(lua_State *L); #if __cplusplus } #endif #endif 在cocos2d-x/cocos/scripting/lua-bindings/manual/network目录下，找到lua_extensions.c文件在头部包含所需文件 #include &quot;sproto/lsproto.h&quot; #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) #include &quot;bitop/bit.h&quot; #endif #include &quot;lpeg/lpeg.h&quot; #include &quot;lpack/lpack.h&quot; 在luax_exts内，加入下列几行。 { &quot;sproto.core&quot;, luaopen_sproto_core }, #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) { &quot;bit&quot;, luaopen_bit }, #endif { &quot;lpeg&quot;, luaopen_lpeg }, { &quot;string&quot;, luaopen_pack }, Android支持 在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件 ../../../../external/lua/lpeg/lpcap.c \ ../../../../external/lua/lpeg/lpcode.c \ ../../../../external/lua/lpeg/lpprint.c \ ../../../../external/lua/lpeg/lptree.c \ ../../../../external/lua/lpeg/lpvm.c \ ../../../../external/lua/sproto/lsproto.c \ ../../../../external/lua/sproto/sproto.c \ ../../../../external/lua/lpack/lpack.c Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误 总得来说还是很简单的，只需三步： 文件放到cocos2d-x/external/lua目录下 修改lua_extensions.c，包含相关文件 修改Android.mk做Android支持 项目代码https://github.com/dot123/cocos2d-lua-sproto]]></content>
       <categories>
-        <category>cocos2dx</category>
+        <category>Cocos2dx</category>
       </categories>
       <tags>
         <tag>sproto</tag>
@@ -16,7 +49,7 @@
     <url>%2Fposts%2F26463%2F</url>
     <content type="text"><![CDATA[1.下载python2.7安装它并设置C:\Python27\到path环境变量中。 2.安装easy_install(可选)使用ez_setup.py进行安装下载完成后双击执行安装文件，即可在C:\Python27\scripts下安装easy_install添加C:\Python27\scripts到环境变量path中打开cmd执行下面命令：1easy_install virtualenv 安装了easy_install之后安装python的库就很简单了，以后需要安装python的库的话则直接在命令行使用easy_install + libname 3.安装Cheetah自动安装：打开cmd执行下面命令：1easy_install cheetah 手动安装:下载Cheetah.zip并解压到C:\Python27\Lib\site-packages然后进入C:\Python27\Lib\site-packages\Cheetah目录，命令行运行: python setup.py install 4.下载PyYAML-3.12.win32-py2.7.exe并安装它。 5.下载android-ndk-r10d并设置NDK_ROOT环境变量。 6.进入到cocos2d-x/tools/tolua文件夹，运行genbindings.py自动生成代码到cocos\scripting\auto-generated\lua-bindings。]]></content>
       <categories>
-        <category>cocos2dx</category>
+        <category>Cocos2dx</category>
       </categories>
       <tags>
         <tag>lua-bindings</tag>
