@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CocosCreator性能优化]]></title>
+    <url>%2Fposts%2F60909%2F</url>
+    <content type="text"><![CDATA[1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交叉其他图片（图集）的Sprite，否则draw call被打断，draw call上升。 7.使用Mask组件会打断draw call。 8.贴图内存管理把所有贴图统一管理生命周期根据设备内存大小，分别设置贴图GC的阈值当贴图使用量超过GC阈值的时候，根据引用计数释放没用到的纹理，分帧清理，不卡顿。 ###参考文档 支持 Texture Packer 的 Polygon outline 裁剪，使用 Polygon outline 裁剪后的图集将对每个小图按透明区域精确裁剪为不规则的多边形，将达到类似 Smash Texture 节省图片空间的效果，对渲染性能也有一定提升。该功能无需在 Creator 中进行额外操作，导入图集后即可自动开启。 从 Cocos Creator 2.0.9 开始，支持将 Label 设为 CHAR 模式，即可实现类似的优化方案。能够以“字”为单位将文本缓存到全局共享的位图中，相同字体样式和字号的每个字符将在全局共享一份缓存。提升纹理利用率的同时，也大大提升了文本刷新时的性能。详见文档[文本缓存类型] 从 Cocos Creator 2.1 开始，集成了压缩纹理支持，编辑器可设置不同平台所需格式，构建时将会自动进行压缩，支持 etc/pvr 的 alpha 通道分离。详见文档[压缩纹理] 从 Cocos Creator 2.0 开始，默认会在原生和 Web 平台上启用动态合图，该功能支持运行时根据渲染的先后顺序动态对纹理进行合并，降低 drawcall，用户无需对 z 进行手动指定。当 Label 启用了 BITMAP 模式后，会同时进入合批。详见文档[动态合图]]]></content>
+      <categories>
+        <category>CocosCreator</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[开发中的一些实用脚本工具]]></title>
     <url>%2Fposts%2F32593%2F</url>
     <content type="text"><![CDATA[1.cocos-sublime是cocosLua快速编译和启动。 2.ClearVS.bat是快速清理VS中间文件。 3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。 4.DeleteGitFoldes.reg是快速清理git版本控制文件。 5.DeleteSvnFoldes.reg是快速清理svn版本控制文件。 6.icon大小转换.js是ps插件可以快速生成各种尺寸的图标。 7.图片压缩工具相关的下载链接。 8.build-mipsle.sh在linux环境下编译mipsle架构cpu可执行文件。 9.mysql快速安装和卸载等相关。 10.mongodb快速安装和卸载等相关。 项目代码https://github.com/dot123/Utilities.git]]></content>
@@ -25,7 +36,7 @@
   <entry>
     <title><![CDATA[CocosCreator帧同步]]></title>
     <url>%2Fposts%2F3013%2F</url>
-    <content type="text"><![CDATA[浮点数处理1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 754标准,因此0.1+0.2=0.30000000000000004不必特殊处理。 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库,要使用查表法。 3.使用确定性随机数。 4.截断小数位数(不是必须的)。]]></content>
+    <content type="text"><![CDATA[浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 function syncRand(seed) { return function() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280.0; }; } let rand = syncRand(18); console.log(rand()); console.log(rand()); console.log(rand()); 4.截断小数位数(不是必须的)。 5.要注意CocosCreator中cc.log或console.log输出结果不是精确的。 console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999]]></content>
       <categories>
         <category>CocosCreator</category>
       </categories>
@@ -36,7 +47,7 @@
   <entry>
     <title><![CDATA[cocos2dx-lua集成sproto]]></title>
     <url>%2Fposts%2F5316%2F</url>
-    <content type="text"><![CDATA[在cocos2d-x/external/lua目录下新建四个文件夹sproto,bitop,lpeg,lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; LUALIB_API int luaopen_bit(lua_State *L); #if __cplusplus } #endif #endif 在lpeg中建立一个lpeg.h文件，内容如下: #ifndef __LUA_LPEG_H_ #define __LUA_LPEG_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lpeg/lptypes.h&quot; #include &quot;lpeg/lpcap.h&quot; #include &quot;lpeg/lpcode.h&quot; #include &quot;lpeg/lpprint.h&quot; #include &quot;lpeg/lptree.h&quot; #include &quot;lpeg/lpvm.h&quot; int luaopen_lpeg(lua_State *L); #if __cplusplus } #endif #endif 在sproto中建立一个lsproto.h文件，内容如下: #ifndef __LUA_LSPROTO_H_ #define __LUA_LSPROTO_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_sproto_core(lua_State *L); #if __cplusplus } #endif #endif 在lpack中建立一个lpack.h文件，内容如下: #ifndef __LUA_LPACK_H_ #define __LUA_LPACK_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_pack(lua_State *L); #if __cplusplus } #endif #endif 在cocos2d-x/cocos/scripting/lua-bindings/manual/network目录下，找到lua_extensions.c文件在头部包含所需文件 #include &quot;sproto/lsproto.h&quot; #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) #include &quot;bitop/bit.h&quot; #endif #include &quot;lpeg/lpeg.h&quot; #include &quot;lpack/lpack.h&quot; 在luax_exts内，加入下列几行。 { &quot;sproto.core&quot;, luaopen_sproto_core }, #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) { &quot;bit&quot;, luaopen_bit }, #endif { &quot;lpeg&quot;, luaopen_lpeg }, { &quot;string&quot;, luaopen_pack }, Android支持 在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件 ../../../../external/lua/lpeg/lpcap.c \ ../../../../external/lua/lpeg/lpcode.c \ ../../../../external/lua/lpeg/lpprint.c \ ../../../../external/lua/lpeg/lptree.c \ ../../../../external/lua/lpeg/lpvm.c \ ../../../../external/lua/sproto/lsproto.c \ ../../../../external/lua/sproto/sproto.c \ ../../../../external/lua/lpack/lpack.c Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误 总得来说还是很简单的，只需三步： 文件放到cocos2d-x/external/lua目录下 修改lua_extensions.c，包含相关文件 修改Android.mk做Android支持 项目代码https://github.com/dot123/cocos2d-lua-sproto]]></content>
+    <content type="text"><![CDATA[在cocos2d-x/external/lua目录下新建四个文件夹sproto，bitop，lpeg，lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; LUALIB_API int luaopen_bit(lua_State *L); #if __cplusplus } #endif #endif 在lpeg中建立一个lpeg.h文件，内容如下: #ifndef __LUA_LPEG_H_ #define __LUA_LPEG_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lpeg/lptypes.h&quot; #include &quot;lpeg/lpcap.h&quot; #include &quot;lpeg/lpcode.h&quot; #include &quot;lpeg/lpprint.h&quot; #include &quot;lpeg/lptree.h&quot; #include &quot;lpeg/lpvm.h&quot; int luaopen_lpeg(lua_State *L); #if __cplusplus } #endif #endif 在sproto中建立一个lsproto.h文件，内容如下: #ifndef __LUA_LSPROTO_H_ #define __LUA_LSPROTO_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_sproto_core(lua_State *L); #if __cplusplus } #endif #endif 在lpack中建立一个lpack.h文件，内容如下: #ifndef __LUA_LPACK_H_ #define __LUA_LPACK_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_pack(lua_State *L); #if __cplusplus } #endif #endif 在cocos2d-x/cocos/scripting/lua-bindings/manual/network目录下，找到lua_extensions.c文件在头部包含所需文件 #include &quot;sproto/lsproto.h&quot; #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) #include &quot;bitop/bit.h&quot; #endif #include &quot;lpeg/lpeg.h&quot; #include &quot;lpack/lpack.h&quot; 在luax_exts内，加入下列几行。 { &quot;sproto.core&quot;, luaopen_sproto_core }, #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) { &quot;bit&quot;, luaopen_bit }, #endif { &quot;lpeg&quot;, luaopen_lpeg }, { &quot;string&quot;, luaopen_pack }, Android支持 在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件 ../../../../external/lua/lpeg/lpcap.c \ ../../../../external/lua/lpeg/lpcode.c \ ../../../../external/lua/lpeg/lpprint.c \ ../../../../external/lua/lpeg/lptree.c \ ../../../../external/lua/lpeg/lpvm.c \ ../../../../external/lua/sproto/lsproto.c \ ../../../../external/lua/sproto/sproto.c \ ../../../../external/lua/lpack/lpack.c Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误 总得来说还是很简单的，只需三步： 文件放到cocos2d-x/external/lua目录下 修改lua_extensions.c，包含相关文件 修改Android.mk做Android支持 项目代码https://github.com/dot123/cocos2d-lua-sproto]]></content>
       <categories>
         <category>Cocos2dx</category>
       </categories>
@@ -71,7 +82,7 @@
     <url>%2Fposts%2F25106%2F</url>
     <content type="text"><![CDATA[测试代码如下：12345678910111213141516171819202122232425262728#define RANGE 200//1.//随机效果一般，每次进入游戏的时候，值都是一样的float randData = CCRANDOM_0_1() * RANGE;CCLOG(&quot;1st-------------&gt;%f&quot;, randData);//2.//随机效果不好，虽然每次进入游戏，值都不一样，但是生成的随机数是递增的，而且相邻两个数之间的变化不大srand(unsigned(time(NULL)));randData = rand() % RANGE;CCLOG(&quot;2rd-------------&gt;%f&quot;, randData);//3.//随机效果较好，每次进入游戏的值都不一样，生成的随机数无规律，相邻的两个数变化较大timeval tv;cocos2d::gettimeofday(&amp;tv, NULL);unsigned long int seed = tv.tv_sec * 1000 + tv.tv_usec / 1000;srand(seed);randData = rand() % RANGE;CCLOG(&quot;3nd-------------&gt;%f&quot;, randData);//4.//C++11的特性，要包含头文件&lt;random&gt;，随机效果不错std::uniform_real_distribution&lt;double&gt; u(0, RANGE);std::default_random_engine e(rand());for (int i = 0; i &lt; 5; i++)&#123; CCLOG(&quot;4th-------------&gt;%f&quot;, u(e));&#125;]]></content>
       <categories>
-        <category>cocos2dx</category>
+        <category>Cocos2dx</category>
       </categories>
       <tags>
         <tag>cocos2dx</tag>
@@ -80,7 +91,7 @@
   <entry>
     <title><![CDATA[iOS9http不能正常使用的解决办法]]></title>
     <url>%2Fposts%2F40531%2F</url>
-    <content type="text"><![CDATA[1.在Info.plist中添加NSAppTransportSecurity类型Dictionary。2.在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean值设为YES。]]></content>
+    <content type="text"><![CDATA[1.在Info.plist中添加NSAppTransportSecurity类型Dictionary。 2.在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean值设为YES。]]></content>
       <categories>
         <category>iOS</category>
       </categories>

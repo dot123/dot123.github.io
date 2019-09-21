@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://g.cocos.dev/"/>
-  <updated>2019-09-15T07:37:03.182Z</updated>
+  <updated>2019-09-21T14:55:44.062Z</updated>
   <id>https://g.cocos.dev/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CocosCreator性能优化</title>
+    <link href="https://g.cocos.dev/posts/60909/"/>
+    <id>https://g.cocos.dev/posts/60909/</id>
+    <published>2019-09-21T07:10:01.000Z</published>
+    <updated>2019-09-21T14:55:44.062Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。</p><p>2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。</p><p>3.将频繁创建的对象使用对象池。</p><p>4.Label使用BMFont。</p><p>5.减少粒子使用。</p><p>6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交叉其他图片（图集）的Sprite，否则draw call被打断，draw call上升。</p><p>7.使用Mask组件会打断draw call。</p><p>8.贴图内存管理把所有贴图统一管理生命周期根据设备内存大小，分别设置贴图GC的阈值当贴图使用量超过GC阈值的时候，根据引用计数释放没用到的纹理，分帧清理，不卡顿。</p><p>###参考文档</p><p>支持 Texture Packer 的 Polygon outline 裁剪，使用 Polygon outline 裁剪后的图集将对每个小图按透明区域精确裁剪为不规则的多边形，将达到类似 Smash Texture 节省图片空间的效果，对渲染性能也有一定提升。该功能无需在 Creator 中进行额外操作，导入图集后即可自动开启。</p><p>从 Cocos Creator 2.0.9 开始，支持将 Label 设为 CHAR 模式，即可实现类似的优化方案。能够以“字”为单位将文本缓存到全局共享的位图中，相同字体样式和字号的每个字符将在全局共享一份缓存。提升纹理利用率的同时，也大大提升了文本刷新时的性能。详见文档<a href="https://docs.cocos.com/creator/2.1/manual/zh/components/label.html#%E6%96%87%E6%9C%AC%E7%BC%93%E5%AD%98%E7%B1%BB%E5%9E%8B%EF%BC%88cache-mode%EF%BC%89" rel="external nofollow noopener noreferrer" target="_blank">[文本缓存类型]</a></p><p>从 Cocos Creator 2.1 开始，集成了压缩纹理支持，编辑器可设置不同平台所需格式，构建时将会自动进行压缩，支持 etc/pvr 的 alpha 通道分离。详见文档<a href="https://docs.cocos.com/creator/2.1/manual/zh/asset-workflow/compress-texture.html" rel="external nofollow noopener noreferrer" target="_blank">[压缩纹理]</a></p><p>从 Cocos Creator 2.0 开始，默认会在原生和 Web 平台上启用动态合图，该功能支持运行时根据渲染的先后顺序动态对纹理进行合并，降低 drawcall，用户无需对 z 进行手动指定。当 Label 启用了 BITMAP 模式后，会同时进入合批。详见文档<a href="https://docs.cocos.com/creator/manual/zh/advanced-topics/dynamic-atlas.html" rel="external nofollow noopener noreferrer" target="_blank">[动态合图]</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。&lt;/p&gt;
+&lt;p&gt;2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。&lt;/p&gt;
+&lt;p&gt;3.将频繁创建的对象使
+      
+    
+    </summary>
+    
+      <category term="CocosCreator" scheme="https://g.cocos.dev/categories/CocosCreator/"/>
+    
+    
+      <category term="性能优化" scheme="https://g.cocos.dev/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>开发中的一些实用脚本工具</title>
@@ -77,15 +104,15 @@
     <link href="https://g.cocos.dev/posts/3013/"/>
     <id>https://g.cocos.dev/posts/3013/</id>
     <published>2019-09-15T06:33:42.000Z</published>
-    <updated>2019-09-15T07:42:03.670Z</updated>
+    <updated>2019-09-21T14:54:13.107Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 754标准,因此0.1+0.2=0.30000000000000004不必特殊处理。</p><p>2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库,要使用查表法。</p><p>3.使用确定性随机数。</p><p>4.截断小数位数(不是必须的)。</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。</p><pre><code>console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 </code></pre><p>2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。</p><p>3.使用确定性随机数。</p><pre><code>function syncRand(seed) {    return function() {        seed = (seed * 9301 + 49297) % 233280;        return seed / 233280.0;    };}let rand = syncRand(18);console.log(rand());console.log(rand());console.log(rand());</code></pre><p>4.截断小数位数(不是必须的)。</p><p>5.要注意CocosCreator中cc.log或console.log输出结果不是精确的。</p><pre><code>console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;浮点数处理&quot;&gt;&lt;a href=&quot;#浮点数处理&quot; class=&quot;headerlink&quot; title=&quot;浮点数处理&quot;&gt;&lt;/a&gt;浮点数处理&lt;/h3&gt;&lt;p&gt;1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 75
+        &lt;h3 id=&quot;浮点数处理&quot;&gt;&lt;a href=&quot;#浮点数处理&quot; class=&quot;headerlink&quot; title=&quot;浮点数处理&quot;&gt;&lt;/a&gt;浮点数处理&lt;/h3&gt;&lt;p&gt;1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标
       
     
     </summary>
@@ -102,15 +129,15 @@
     <link href="https://g.cocos.dev/posts/5316/"/>
     <id>https://g.cocos.dev/posts/5316/</id>
     <published>2016-03-01T10:01:30.000Z</published>
-    <updated>2019-09-15T07:42:56.223Z</updated>
+    <updated>2019-09-21T14:34:16.075Z</updated>
     
-    <content type="html"><![CDATA[<p>在cocos2d-x/external/lua目录下新建四个文件夹sproto,bitop,lpeg,lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下:</p><pre><code>#ifndef __LUA_BITOP_H_#define __LUA_BITOP_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lauxlib.h&quot;LUALIB_API int luaopen_bit(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在lpeg中建立一个lpeg.h文件，内容如下:</p><pre><code>#ifndef __LUA_LPEG_H_#define __LUA_LPEG_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lpeg/lptypes.h&quot;#include &quot;lpeg/lpcap.h&quot;#include &quot;lpeg/lpcode.h&quot;#include &quot;lpeg/lpprint.h&quot;#include &quot;lpeg/lptree.h&quot;#include &quot;lpeg/lpvm.h&quot;int luaopen_lpeg(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在sproto中建立一个lsproto.h文件，内容如下:</p><pre><code>#ifndef __LUA_LSPROTO_H_#define __LUA_LSPROTO_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lauxlib.h&quot;int luaopen_sproto_core(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在lpack中建立一个lpack.h文件，内容如下:</p><pre><code>#ifndef __LUA_LPACK_H_#define __LUA_LPACK_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lauxlib.h&quot;int luaopen_pack(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在cocos2d-x/cocos/scripting/lua-bindings/manual/network目录下，找到lua_extensions.c文件在头部包含所需文件</p><pre><code>#include &quot;sproto/lsproto.h&quot;#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID)#include &quot;bitop/bit.h&quot;#endif#include &quot;lpeg/lpeg.h&quot;#include &quot;lpack/lpack.h&quot;在luax_exts内，加入下列几行。  { &quot;sproto.core&quot;, luaopen_sproto_core },#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID)  { &quot;bit&quot;, luaopen_bit },#endif  { &quot;lpeg&quot;, luaopen_lpeg },  { &quot;string&quot;, luaopen_pack },</code></pre><p>Android支持</p><p>在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件</p><pre><code>../../../../external/lua/lpeg/lpcap.c \../../../../external/lua/lpeg/lpcode.c \../../../../external/lua/lpeg/lpprint.c \../../../../external/lua/lpeg/lptree.c \../../../../external/lua/lpeg/lpvm.c \../../../../external/lua/sproto/lsproto.c \../../../../external/lua/sproto/sproto.c \../../../../external/lua/lpack/lpack.c </code></pre><p>Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误</p><p>总得来说还是很简单的，只需三步：<br>  文件放到cocos2d-x/external/lua目录下<br>  修改lua_extensions.c，包含相关文件<br>  修改Android.mk做Android支持</p><h4 id="项目代码https-github-com-dot123-cocos2d-lua-sproto"><a href="#项目代码https-github-com-dot123-cocos2d-lua-sproto" class="headerlink" title="项目代码https://github.com/dot123/cocos2d-lua-sproto"></a>项目代码<a href="https://github.com/dot123/cocos2d-lua-sproto" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/cocos2d-lua-sproto</a></h4>]]></content>
+    <content type="html"><![CDATA[<p>在cocos2d-x/external/lua目录下新建四个文件夹sproto，bitop，lpeg，lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下:</p><pre><code>#ifndef __LUA_BITOP_H_#define __LUA_BITOP_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lauxlib.h&quot;LUALIB_API int luaopen_bit(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在lpeg中建立一个lpeg.h文件，内容如下:</p><pre><code>#ifndef __LUA_LPEG_H_#define __LUA_LPEG_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lpeg/lptypes.h&quot;#include &quot;lpeg/lpcap.h&quot;#include &quot;lpeg/lpcode.h&quot;#include &quot;lpeg/lpprint.h&quot;#include &quot;lpeg/lptree.h&quot;#include &quot;lpeg/lpvm.h&quot;int luaopen_lpeg(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在sproto中建立一个lsproto.h文件，内容如下:</p><pre><code>#ifndef __LUA_LSPROTO_H_#define __LUA_LSPROTO_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lauxlib.h&quot;int luaopen_sproto_core(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在lpack中建立一个lpack.h文件，内容如下:</p><pre><code>#ifndef __LUA_LPACK_H_#define __LUA_LPACK_H_#if __cplusplusextern &quot;C&quot; {#endif#include &quot;lauxlib.h&quot;int luaopen_pack(lua_State *L);#if __cplusplus}#endif#endif</code></pre><p>在cocos2d-x/cocos/scripting/lua-bindings/manual/network目录下，找到lua_extensions.c文件在头部包含所需文件</p><pre><code>#include &quot;sproto/lsproto.h&quot;#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID)#include &quot;bitop/bit.h&quot;#endif#include &quot;lpeg/lpeg.h&quot;#include &quot;lpack/lpack.h&quot;在luax_exts内，加入下列几行。  { &quot;sproto.core&quot;, luaopen_sproto_core },#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID)  { &quot;bit&quot;, luaopen_bit },#endif  { &quot;lpeg&quot;, luaopen_lpeg },  { &quot;string&quot;, luaopen_pack },</code></pre><p>Android支持</p><p>在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件</p><pre><code>../../../../external/lua/lpeg/lpcap.c \../../../../external/lua/lpeg/lpcode.c \../../../../external/lua/lpeg/lpprint.c \../../../../external/lua/lpeg/lptree.c \../../../../external/lua/lpeg/lpvm.c \../../../../external/lua/sproto/lsproto.c \../../../../external/lua/sproto/sproto.c \../../../../external/lua/lpack/lpack.c </code></pre><p>Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误</p><p>总得来说还是很简单的，只需三步：<br>  文件放到cocos2d-x/external/lua目录下<br>  修改lua_extensions.c，包含相关文件<br>  修改Android.mk做Android支持</p><h4 id="项目代码https-github-com-dot123-cocos2d-lua-sproto"><a href="#项目代码https-github-com-dot123-cocos2d-lua-sproto" class="headerlink" title="项目代码https://github.com/dot123/cocos2d-lua-sproto"></a>项目代码<a href="https://github.com/dot123/cocos2d-lua-sproto" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/cocos2d-lua-sproto</a></h4>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;在cocos2d-x/external/lua目录下新建四个文件夹sproto,bitop,lpeg,lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下:&lt;/p&gt;
+        &lt;p&gt;在cocos2d-x/external/lua目录下新建四个文件夹sproto，bitop，lpeg，lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#ifndef _
       
     
@@ -178,7 +205,7 @@
     <link href="https://g.cocos.dev/posts/25106/"/>
     <id>https://g.cocos.dev/posts/25106/</id>
     <published>2016-02-25T14:37:20.000Z</published>
-    <updated>2018-09-01T10:59:05.120Z</updated>
+    <updated>2019-09-21T14:43:21.349Z</updated>
     
     <content type="html"><![CDATA[<h5 id="测试代码如下："><a href="#测试代码如下：" class="headerlink" title="测试代码如下："></a>测试代码如下：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#define RANGE 200</span><br><span class="line">//1.</span><br><span class="line">//随机效果一般，每次进入游戏的时候，值都是一样的</span><br><span class="line">float randData = CCRANDOM_0_1() * RANGE;</span><br><span class="line">CCLOG(&quot;1st-------------&gt;%f&quot;, randData);</span><br><span class="line"></span><br><span class="line">//2.</span><br><span class="line">//随机效果不好，虽然每次进入游戏，值都不一样，但是生成的随机数是递增的，而且相邻两个数之间的变化不大</span><br><span class="line">srand(unsigned(time(NULL)));</span><br><span class="line">randData = rand() % RANGE;</span><br><span class="line">CCLOG(&quot;2rd-------------&gt;%f&quot;, randData);</span><br><span class="line"></span><br><span class="line">//3.</span><br><span class="line">//随机效果较好，每次进入游戏的值都不一样，生成的随机数无规律，相邻的两个数变化较大</span><br><span class="line">timeval tv;</span><br><span class="line">cocos2d::gettimeofday(&amp;tv, NULL);</span><br><span class="line">unsigned long int seed = tv.tv_sec * 1000 + tv.tv_usec / 1000;</span><br><span class="line">srand(seed);</span><br><span class="line">randData = rand() % RANGE;</span><br><span class="line">CCLOG(&quot;3nd-------------&gt;%f&quot;, randData);</span><br><span class="line"></span><br><span class="line">//4.</span><br><span class="line">//C++11的特性，要包含头文件&lt;random&gt;，随机效果不错</span><br><span class="line">std::uniform_real_distribution&lt;double&gt; u(0, RANGE);</span><br><span class="line">std::default_random_engine e(rand());</span><br><span class="line">for (int i = 0; i &lt; 5; i++)&#123;</span><br><span class="line">CCLOG(&quot;4th-------------&gt;%f&quot;, u(e));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -191,7 +218,7 @@
     
     </summary>
     
-      <category term="cocos2dx" scheme="https://g.cocos.dev/categories/cocos2dx/"/>
+      <category term="Cocos2dx" scheme="https://g.cocos.dev/categories/Cocos2dx/"/>
     
     
       <category term="cocos2dx" scheme="https://g.cocos.dev/tags/cocos2dx/"/>
@@ -203,15 +230,16 @@
     <link href="https://g.cocos.dev/posts/40531/"/>
     <id>https://g.cocos.dev/posts/40531/</id>
     <published>2016-02-23T06:11:23.000Z</published>
-    <updated>2018-09-02T06:21:43.198Z</updated>
+    <updated>2019-09-21T14:32:45.490Z</updated>
     
-    <content type="html"><![CDATA[<p>1.在Info.plist中添加NSAppTransportSecurity类型Dictionary。<br>2.在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean值设为YES。</p>]]></content>
+    <content type="html"><![CDATA[<p>1.在Info.plist中添加NSAppTransportSecurity类型Dictionary。</p><p>2.在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean值设为YES。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;1.在Info.plist中添加NSAppTransportSecurity类型Dictionary。&lt;br&gt;2.在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean值设为YES。&lt;/p&gt;
+        &lt;p&gt;1.在Info.plist中添加NSAppTransportSecurity类型Dictionary。&lt;/p&gt;
+&lt;p&gt;2.在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean值设为YES。&lt;/p&gt;
 
       
     

@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 754标准,因此0.1+0.2=0.30000000000000004不必特殊处理。 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库,要使用查表法。 3.使用确定性随机数。 4.截断小数位数(不是必须的)。">
+<meta name="description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 fu">
 <meta name="keywords" content="帧同步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocosCreator帧同步">
 <meta property="og:url" content="https://g.cocos.dev/posts/3013/index.html">
 <meta property="og:site_name" content="DOT123&#39;S BLOG">
-<meta property="og:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 754标准,因此0.1+0.2=0.30000000000000004不必特殊处理。 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库,要使用查表法。 3.使用确定性随机数。 4.截断小数位数(不是必须的)。">
+<meta property="og:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 fu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-15T07:42:03.670Z">
+<meta property="og:updated_time" content="2019-09-21T14:54:13.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocosCreator帧同步">
-<meta name="twitter:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 754标准,因此0.1+0.2=0.30000000000000004不必特殊处理。 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库,要使用查表法。 3.使用确定性随机数。 4.截断小数位数(不是必须的)。">
+<meta name="twitter:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 fu">
 
 
 
@@ -389,11 +389,25 @@
       
 
       
-        <h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE 754标准，现代cpu都遵循IEEE 754标准,因此0.1+0.2=0.30000000000000004不必特殊处理。</p>
-<p>2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库,要使用查表法。</p>
+        <h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。</p>
+<pre><code>console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 
+</code></pre><p>2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。</p>
 <p>3.使用确定性随机数。</p>
-<p>4.截断小数位数(不是必须的)。</p>
+<pre><code>function syncRand(seed) {
+    return function() {
+        seed = (seed * 9301 + 49297) % 233280;
+        return seed / 233280.0;
+    };
+}
 
+let rand = syncRand(18);
+console.log(rand());
+console.log(rand());
+console.log(rand());
+</code></pre><p>4.截断小数位数(不是必须的)。</p>
+<p>5.要注意CocosCreator中cc.log或console.log输出结果不是精确的。</p>
+<pre><code>console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999
+</code></pre>
       
     </div>
     
@@ -548,7 +562,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -559,7 +573,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -570,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
