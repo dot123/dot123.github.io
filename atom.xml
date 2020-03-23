@@ -48,18 +48,16 @@
     <link href="https://g.cocos.dev/posts/32593/"/>
     <id>https://g.cocos.dev/posts/32593/</id>
     <published>2019-09-15T07:28:03.000Z</published>
-    <updated>2019-09-15T07:37:03.182Z</updated>
+    <updated>2020-03-23T14:41:02.767Z</updated>
     
-    <content type="html"><![CDATA[<p>1.cocos-sublime是cocosLua快速编译和启动。</p><p>2.ClearVS.bat是快速清理VS中间文件。</p><p>3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。</p><p>4.DeleteGitFoldes.reg是快速清理git版本控制文件。</p><p>5.DeleteSvnFoldes.reg是快速清理svn版本控制文件。</p><p>6.icon大小转换.js是ps插件可以快速生成各种尺寸的图标。</p><p>7.图片压缩工具相关的下载链接。</p><p>8.build-mipsle.sh在linux环境下编译mipsle架构cpu可执行文件。</p><p>9.mysql快速安装和卸载等相关。</p><p>10.mongodb快速安装和卸载等相关。</p><h4 id="项目代码https-github-com-dot123-Utilities-git"><a href="#项目代码https-github-com-dot123-Utilities-git" class="headerlink" title="项目代码https://github.com/dot123/Utilities.git"></a>项目代码<a href="https://github.com/dot123/Utilities.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/Utilities.git</a></h4>]]></content>
+    <content type="html"><![CDATA[<h1 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h1><p>1.cocos-sublime是cocosLua快速编译和启动。</p><p>2.ClearVS.bat是快速清理VS中间文件。</p><p>3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。</p><p>4.DeleteGitFoldes.reg是快速清理git版本控制文件。</p><p>5.DeleteSvnFoldes.reg是快速清理svn版本控制文件。</p><p>6.icon大小转换.js是ps插件可以快速生成各种尺寸的图标。</p><p>7.图片压缩工具相关的下载链接。</p><p>8.build-mipsle.sh在linux环境下编译mipsle架构cpu可执行文件。</p><p>9.mysql快速安装和卸载等相关。</p><p>10.mongodb快速安装和卸载等相关。</p><p>11.obfuscator是js文件混淆加密。</p><h4 id="项目代码https-github-com-dot123-Utilities-git"><a href="#项目代码https-github-com-dot123-Utilities-git" class="headerlink" title="项目代码https://github.com/dot123/Utilities.git"></a>项目代码<a href="https://github.com/dot123/Utilities.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/Utilities.git</a></h4>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;1.cocos-sublime是cocosLua快速编译和启动。&lt;/p&gt;
-&lt;p&gt;2.ClearVS.bat是快速清理VS中间文件。&lt;/p&gt;
-&lt;p&gt;3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。&lt;/p&gt;
-&lt;p&gt;4.DeleteGitFoldes.reg是快速
+        &lt;h1 id=&quot;Utilities&quot;&gt;&lt;a href=&quot;#Utilities&quot; class=&quot;headerlink&quot; title=&quot;Utilities&quot;&gt;&lt;/a&gt;Utilities&lt;/h1&gt;&lt;p&gt;1.cocos-sublime是cocosLua快速编译和启动。&lt;/p&gt;
+&lt;p&gt;2.
       
     
     </summary>
@@ -76,18 +74,16 @@
     <link href="https://g.cocos.dev/posts/55894/"/>
     <id>https://g.cocos.dev/posts/55894/</id>
     <published>2019-09-15T07:17:06.000Z</published>
-    <updated>2019-09-15T07:37:05.878Z</updated>
+    <updated>2020-03-23T14:43:09.813Z</updated>
     
-    <content type="html"><![CDATA[<p>1.excel导表工具支持导出txt、lua、json文件。</p><p>2.参考Demo.xlsx自动转换字段类型[1,2,3]则导出对应文件格式的数组、数字导出数字、字符串导出字符串。</p><p>3.开头#号注释。</p><p>4.config.json可以配置导出路径如不填则不导出该文件。</p><p>5.fileList方便读取所有导出的文件。</p><h4 id="项目代码https-github-com-dot123-excelTool-git"><a href="#项目代码https-github-com-dot123-excelTool-git" class="headerlink" title="项目代码https://github.com/dot123/excelTool.git"></a>项目代码<a href="https://github.com/dot123/excelTool.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/excelTool.git</a></h4>]]></content>
+    <content type="html"><![CDATA[<h1 id="excelTool"><a href="#excelTool" class="headerlink" title="excelTool"></a>excelTool</h1><p>1.excel导表工具支持导出txt、lua、json文件。</p><p>2.支持格式参考测试例子.xlsx。</p><p>3.开头#号注释。</p><p>4.config.json可以配置导出路径如不填则不导出该文件。</p><p>5.fileList方便读取所有导出的文件。</p><p>6.配置说明</p><pre><code>type Config struct {    Configs      string    Txt          string    JSON         string    Lua          string    FieldLine    int    //字段key开始行    DataLine     int    //有效配置开始行    Comma        string //txt分隔符,默认是制表符    Comment      string //excel注释符    Linefeed     string //txt换行符    UseSheetName bool   //使用工作表名为文件输出名}</code></pre><h4 id="项目代码https-github-com-dot123-excelTool-git"><a href="#项目代码https-github-com-dot123-excelTool-git" class="headerlink" title="项目代码https://github.com/dot123/excelTool.git"></a>项目代码<a href="https://github.com/dot123/excelTool.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/excelTool.git</a></h4>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;1.excel导表工具支持导出txt、lua、json文件。&lt;/p&gt;
-&lt;p&gt;2.参考Demo.xlsx自动转换字段类型[1,2,3]则导出对应文件格式的数组、数字导出数字、字符串导出字符串。&lt;/p&gt;
-&lt;p&gt;3.开头#号注释。&lt;/p&gt;
-&lt;p&gt;4.config.json可以配置
+        &lt;h1 id=&quot;excelTool&quot;&gt;&lt;a href=&quot;#excelTool&quot; class=&quot;headerlink&quot; title=&quot;excelTool&quot;&gt;&lt;/a&gt;excelTool&lt;/h1&gt;&lt;p&gt;1.excel导表工具支持导出txt、lua、json文件。&lt;/p&gt;
+&lt;p&gt;2.支持
       
     
     </summary>
@@ -104,15 +100,15 @@
     <link href="https://g.cocos.dev/posts/3013/"/>
     <id>https://g.cocos.dev/posts/3013/</id>
     <published>2019-09-15T06:33:42.000Z</published>
-    <updated>2019-09-21T14:54:13.107Z</updated>
+    <updated>2020-03-23T14:38:26.781Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。</p><pre><code>console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 </code></pre><p>2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。</p><p>3.使用确定性随机数。</p><pre><code>function syncRand(seed) {    return function() {        seed = (seed * 9301 + 49297) % 233280;        return seed / 233280.0;    };}let rand = syncRand(18);console.log(rand());console.log(rand());console.log(rand());</code></pre><p>4.截断小数位数(不是必须的)。</p><p>5.要注意CocosCreator中cc.log或console.log输出结果不是精确的。</p><pre><code>console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循<a href="https://zh.wikipedia.org/wiki/IEEE_754" rel="external nofollow noopener noreferrer" target="_blank">IEEE_754标准</a>，误差是稳定的。</p><pre><code>console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 </code></pre><p>2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。</p><p>3.使用确定性随机数。</p><pre><code>function syncRand(seed) {    return function() {        seed = (seed * 9301 + 49297) % 233280;        return seed / 233280.0;    };}let rand = syncRand(18);console.log(rand());console.log(rand());console.log(rand());</code></pre><p>4.截断小数位数(不是必须的)。</p><p>5.要注意日志输出结果精度不高。</p><pre><code>console.log(0.1 + 0.2); //0.30000000000000004console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999//C++代码#include &lt;iostream&gt;int main(){    double a = 0.1;    double b = 0.2;    double c = 0.1 + 0.2;     std::cout &lt;&lt; c;     if (c == 0.30000000000000004) {         std::cout &lt;&lt; &quot;Hello World!\n&quot;;     }     return 0;}//输出：0.3Hello World!</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;浮点数处理&quot;&gt;&lt;a href=&quot;#浮点数处理&quot; class=&quot;headerlink&quot; title=&quot;浮点数处理&quot;&gt;&lt;/a&gt;浮点数处理&lt;/h3&gt;&lt;p&gt;1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标
+        &lt;h3 id=&quot;浮点数处理&quot;&gt;&lt;a href=&quot;#浮点数处理&quot; class=&quot;headerlink&quot; title=&quot;浮点数处理&quot;&gt;&lt;/a&gt;浮点数处理&lt;/h3&gt;&lt;p&gt;1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循&lt;a href=
       
     
     </summary>

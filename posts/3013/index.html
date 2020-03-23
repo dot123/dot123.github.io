@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 fu">
+<meta name="description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE_754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 f">
 <meta name="keywords" content="帧同步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocosCreator帧同步">
 <meta property="og:url" content="https://g.cocos.dev/posts/3013/index.html">
 <meta property="og:site_name" content="DOT123&#39;S BLOG">
-<meta property="og:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 fu">
+<meta property="og:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE_754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-21T14:54:13.107Z">
+<meta property="og:updated_time" content="2020-03-23T14:38:26.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocosCreator帧同步">
-<meta name="twitter:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 fu">
+<meta name="twitter:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE_754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 f">
 
 
 
@@ -389,7 +389,7 @@
       
 
       
-        <h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。</p>
+        <h3 id="浮点数处理"><a href="#浮点数处理" class="headerlink" title="浮点数处理"></a>浮点数处理</h3><p>1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循<a href="https://zh.wikipedia.org/wiki/IEEE_754" rel="external nofollow noopener noreferrer" target="_blank">IEEE_754标准</a>，误差是稳定的。</p>
 <pre><code>console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 
 </code></pre><p>2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。</p>
 <p>3.使用确定性随机数。</p>
@@ -405,8 +405,26 @@ console.log(rand());
 console.log(rand());
 console.log(rand());
 </code></pre><p>4.截断小数位数(不是必须的)。</p>
-<p>5.要注意CocosCreator中cc.log或console.log输出结果不是精确的。</p>
-<pre><code>console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999
+<p>5.要注意日志输出结果精度不高。</p>
+<pre><code>console.log(0.1 + 0.2); //0.30000000000000004
+console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999
+
+//C++代码
+#include &lt;iostream&gt;
+
+int main(){
+    double a = 0.1;
+    double b = 0.2;
+    double c = 0.1 + 0.2;
+
+     std::cout &lt;&lt; c;
+
+     if (c == 0.30000000000000004) {
+         std::cout &lt;&lt; &quot;Hello World!\n&quot;;
+     }
+     return 0;
+}
+//输出：0.3Hello World!
 </code></pre>
       
     </div>
@@ -660,7 +678,7 @@ console.log(rand());
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[开发中的一些实用脚本工具]]></title>
     <url>%2Fposts%2F32593%2F</url>
-    <content type="text"><![CDATA[1.cocos-sublime是cocosLua快速编译和启动。 2.ClearVS.bat是快速清理VS中间文件。 3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。 4.DeleteGitFoldes.reg是快速清理git版本控制文件。 5.DeleteSvnFoldes.reg是快速清理svn版本控制文件。 6.icon大小转换.js是ps插件可以快速生成各种尺寸的图标。 7.图片压缩工具相关的下载链接。 8.build-mipsle.sh在linux环境下编译mipsle架构cpu可执行文件。 9.mysql快速安装和卸载等相关。 10.mongodb快速安装和卸载等相关。 项目代码https://github.com/dot123/Utilities.git]]></content>
+    <content type="text"><![CDATA[Utilities1.cocos-sublime是cocosLua快速编译和启动。 2.ClearVS.bat是快速清理VS中间文件。 3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。 4.DeleteGitFoldes.reg是快速清理git版本控制文件。 5.DeleteSvnFoldes.reg是快速清理svn版本控制文件。 6.icon大小转换.js是ps插件可以快速生成各种尺寸的图标。 7.图片压缩工具相关的下载链接。 8.build-mipsle.sh在linux环境下编译mipsle架构cpu可执行文件。 9.mysql快速安装和卸载等相关。 10.mongodb快速安装和卸载等相关。 11.obfuscator是js文件混淆加密。 项目代码https://github.com/dot123/Utilities.git]]></content>
       <categories>
         <category>工具</category>
       </categories>
@@ -25,7 +25,7 @@
   <entry>
     <title><![CDATA[Excel导表工具]]></title>
     <url>%2Fposts%2F55894%2F</url>
-    <content type="text"><![CDATA[1.excel导表工具支持导出txt、lua、json文件。 2.参考Demo.xlsx自动转换字段类型[1,2,3]则导出对应文件格式的数组、数字导出数字、字符串导出字符串。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 项目代码https://github.com/dot123/excelTool.git]]></content>
+    <content type="text"><![CDATA[excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.配置说明 type Config struct { Configs string Txt string JSON string Lua string FieldLine int //字段key开始行 DataLine int //有效配置开始行 Comma string //txt分隔符,默认是制表符 Comment string //excel注释符 Linefeed string //txt换行符 UseSheetName bool //使用工作表名为文件输出名 } 项目代码https://github.com/dot123/excelTool.git]]></content>
       <categories>
         <category>go</category>
       </categories>
@@ -36,7 +36,7 @@
   <entry>
     <title><![CDATA[CocosCreator帧同步]]></title>
     <url>%2Fposts%2F3013%2F</url>
-    <content type="text"><![CDATA[浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 function syncRand(seed) { return function() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280.0; }; } let rand = syncRand(18); console.log(rand()); console.log(rand()); console.log(rand()); 4.截断小数位数(不是必须的)。 5.要注意CocosCreator中cc.log或console.log输出结果不是精确的。 console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999]]></content>
+    <content type="text"><![CDATA[浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE_754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 function syncRand(seed) { return function() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280.0; }; } let rand = syncRand(18); console.log(rand()); console.log(rand()); console.log(rand()); 4.截断小数位数(不是必须的)。 5.要注意日志输出结果精度不高。 console.log(0.1 + 0.2); //0.30000000000000004 console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999 //C++代码 #include &lt;iostream&gt; int main(){ double a = 0.1; double b = 0.2; double c = 0.1 + 0.2; std::cout &lt;&lt; c; if (c == 0.30000000000000004) { std::cout &lt;&lt; &quot;Hello World!\n&quot;; } return 0; } //输出：0.3Hello World!]]></content>
       <categories>
         <category>CocosCreator</category>
       </categories>
