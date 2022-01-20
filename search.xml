@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[CocosCreator性能优化]]></title>
+    <url>%2Fposts%2F60909%2F</url>
+    <content type="text"><![CDATA[1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交叉其他图片（图集）的Sprite，否则draw call被打断，draw call上升。 7.使用Mask组件会打断draw call。 8.贴图内存管理把所有贴图统一管理生命周期根据设备内存大小，分别设置贴图GC的阈值当贴图使用量超过GC阈值的时候，根据引用计数释放没用到的纹理，分帧清理，不卡顿。 9.使用动态合图cc.dynamicAtlasManager。 10.修改render-flow.js使其相同精灵的节点按顺序依次渲染（动态合批）。 11.分帧创建节点。 12.当节点透明度为0时不会渲染，子节点也不会渲染（Cocos Creator 2.13）。 13.动静分离节点。 ###参考文档 支持 Texture Packer 的 Polygon outline 裁剪，使用 Polygon outline 裁剪后的图集将对每个小图按透明区域精确裁剪为不规则的多边形，将达到类似 Smash Texture 节省图片空间的效果，对渲染性能也有一定提升。该功能无需在 Creator 中进行额外操作，导入图集后即可自动开启。 从 Cocos Creator 2.0.9 开始，支持将 Label 设为 CHAR 模式，即可实现类似的优化方案。能够以“字”为单位将文本缓存到全局共享的位图中，相同字体样式和字号的每个字符将在全局共享一份缓存。提升纹理利用率的同时，也大大提升了文本刷新时的性能。详见文档[文本缓存类型] 从 Cocos Creator 2.1 开始，集成了压缩纹理支持，编辑器可设置不同平台所需格式，构建时将会自动进行压缩，支持 etc/pvr 的 alpha 通道分离。详见文档[压缩纹理] 从 Cocos Creator 2.0 开始，默认会在原生和 Web 平台上启用动态合图，该功能支持运行时根据渲染的先后顺序动态对纹理进行合并，降低 drawcall，用户无需对 z 进行手动指定。当 Label 启用了 BITMAP 模式后，会同时进入合批。详见文档[动态合图]]]></content>
+      <categories>
+        <category>CocosCreator</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[开发中的一些实用脚本工具]]></title>
+    <url>%2Fposts%2F32593%2F</url>
+    <content type="text"><![CDATA[Utilities1.cocos-sublime是cocosLua快速编译和启动。 2.ClearVS.bat是快速清理VS中间文件。 3.Copy.bat是快速拷贝源文件夹所有文件到目标目标文件夹。 4.DeleteGitFoldes.reg是快速清理git版本控制文件。 5.DeleteSvnFoldes.reg是快速清理svn版本控制文件。 6.icon大小转换.js是ps插件可以快速生成各种尺寸的图标。 7.图片压缩工具相关的下载链接。 8.build-mipsle.sh在linux环境下编译mipsle架构cpu可执行文件。 9.mysql快速安装和卸载等相关。 10.mongodb快速安装和卸载等相关。 11.obfuscator是js文件混淆加密。 项目代码https://github.com/dot123/Utilities.git]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>脚本工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Excel导表工具]]></title>
+    <url>%2Fposts%2F55894%2F</url>
+    <content type="text"><![CDATA[excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.配置说明 type Config struct { Configs string Txt string JSON string Lua string FieldLine int //字段key开始行 DataLine int //有效配置开始行 Comma string //txt分隔符,默认是制表符 Comment string //excel注释符 Linefeed string //txt换行符 UseSheetName bool //使用工作表名为文件输出名 } 项目代码https://github.com/dot123/excelTool.git]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>Excel导表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CocosCreator帧同步]]></title>
+    <url>%2Fposts%2F3013%2F</url>
+    <content type="text"><![CDATA[浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE_754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004 2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 function syncRand(seed) { return function() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280.0; }; } let rand = syncRand(18); console.log(rand()); console.log(rand()); console.log(rand()); 4.截断小数位数(不是必须的)。 5.要注意日志输出结果精度不高。 console.log(0.1 + 0.2); //0.30000000000000004 console.log(3.142) //网页输出3.142 原生平台输出3.1419999999999999 //C++代码 #include &lt;iostream&gt; int main(){ double a = 0.1; double b = 0.2; double c = 0.1 + 0.2; std::cout &lt;&lt; c; if (c == 0.30000000000000004) { std::cout &lt;&lt; &quot;Hello World!\n&quot;; } return 0; } //输出：0.3Hello World!]]></content>
+      <categories>
+        <category>CocosCreator</category>
+      </categories>
+      <tags>
+        <tag>帧同步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[cocos2dx-lua集成sproto]]></title>
+    <url>%2Fposts%2F5316%2F</url>
+    <content type="text"><![CDATA[在cocos2d-x/external/lua目录下新建四个文件夹sproto，bitop，lpeg，lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; LUALIB_API int luaopen_bit(lua_State *L); #if __cplusplus } #endif #endif 在lpeg中建立一个lpeg.h文件，内容如下: #ifndef __LUA_LPEG_H_ #define __LUA_LPEG_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lpeg/lptypes.h&quot; #include &quot;lpeg/lpcap.h&quot; #include &quot;lpeg/lpcode.h&quot; #include &quot;lpeg/lpprint.h&quot; #include &quot;lpeg/lptree.h&quot; #include &quot;lpeg/lpvm.h&quot; int luaopen_lpeg(lua_State *L); #if __cplusplus } #endif #endif 在sproto中建立一个lsproto.h文件，内容如下: #ifndef __LUA_LSPROTO_H_ #define __LUA_LSPROTO_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_sproto_core(lua_State *L); #if __cplusplus } #endif #endif 在lpack中建立一个lpack.h文件，内容如下: #ifndef __LUA_LPACK_H_ #define __LUA_LPACK_H_ #if __cplusplus extern &quot;C&quot; { #endif #include &quot;lauxlib.h&quot; int luaopen_pack(lua_State *L); #if __cplusplus } #endif #endif 在cocos2d-x/cocos/scripting/lua-bindings/manual/network目录下，找到lua_extensions.c文件在头部包含所需文件 #include &quot;sproto/lsproto.h&quot; #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) #include &quot;bitop/bit.h&quot; #endif #include &quot;lpeg/lpeg.h&quot; #include &quot;lpack/lpack.h&quot; 在luax_exts内，加入下列几行。 { &quot;sproto.core&quot;, luaopen_sproto_core }, #if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID) { &quot;bit&quot;, luaopen_bit }, #endif { &quot;lpeg&quot;, luaopen_lpeg }, { &quot;string&quot;, luaopen_pack }, Android支持 在cocos2d-x/cocos/scripting/lua-bindings/proj.android目录下，打开 Android.mk 文件，在那一长串加载c文件后面，加入我们需要的c文件 ../../../../external/lua/lpeg/lpcap.c \ ../../../../external/lua/lpeg/lpcode.c \ ../../../../external/lua/lpeg/lpprint.c \ ../../../../external/lua/lpeg/lptree.c \ ../../../../external/lua/lpeg/lpvm.c \ ../../../../external/lua/sproto/lsproto.c \ ../../../../external/lua/sproto/sproto.c \ ../../../../external/lua/lpack/lpack.c Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误 总得来说还是很简单的，只需三步： 文件放到cocos2d-x/external/lua目录下 修改lua_extensions.c，包含相关文件 修改Android.mk做Android支持 项目代码https://github.com/dot123/cocos2d-lua-sproto]]></content>
+      <categories>
+        <category>Cocos2dx</category>
+      </categories>
+      <tags>
+        <tag>sproto</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lua-bindings环境配置]]></title>
+    <url>%2Fposts%2F26463%2F</url>
+    <content type="text"><![CDATA[1.下载python2.7安装它并设置C:\Python27\到path环境变量中。 2.安装easy_install(可选)使用ez_setup.py进行安装下载完成后双击执行安装文件，即可在C:\Python27\scripts下安装easy_install添加C:\Python27\scripts到环境变量path中打开cmd执行下面命令：1easy_install virtualenv 安装了easy_install之后安装python的库就很简单了，以后需要安装python的库的话则直接在命令行使用easy_install + libname 3.安装Cheetah自动安装：打开cmd执行下面命令：1easy_install cheetah 手动安装:下载Cheetah.zip并解压到C:\Python27\Lib\site-packages然后进入C:\Python27\Lib\site-packages\Cheetah目录，命令行运行: python setup.py install 4.下载PyYAML-3.12.win32-py2.7.exe并安装它。 5.下载android-ndk-r10d并设置NDK_ROOT环境变量。 6.进入到cocos2d-x/tools/tolua文件夹，运行genbindings.py自动生成代码到cocos\scripting\auto-generated\lua-bindings。]]></content>
+      <categories>
+        <category>Cocos2dx</category>
+      </categories>
+      <tags>
+        <tag>lua-bindings</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[VS2015自动添加头部注释]]></title>
+    <url>%2Fposts%2F4710%2F</url>
+    <content type="text"><![CDATA[让VS自动生成类的头部注释，只需修改C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\ItemTemplatesCache\CSharp\Code\2052\Class路径下的Class.cs文件示例如下：12345678910111213141516171819202122#region 模块信息/*----------------------------------------------------------------// 模块名：$safeitemname$// 创建者：conjurer// 修改者列表：// 创建日期：$time$// 模块描述：//----------------------------------------------------------------*/#endregionusing System;using System.Collections.Generic;$if$ ($targetframeworkversion$ &gt;= 3.5)using System.Linq;$endif$$if$ ($targetframeworkversion$ &gt;= 4.5)using System.Threading.Tasks;$endif$namespace Dot123&#123; public class $safeitemrootname$ &#123; &#125;&#125;]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>vs2015</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[cocos2dx中随机数生成的各种方法比较]]></title>
+    <url>%2Fposts%2F25106%2F</url>
+    <content type="text"><![CDATA[测试代码如下：12345678910111213141516171819202122232425262728#define RANGE 200//1.//随机效果一般，每次进入游戏的时候，值都是一样的float randData = CCRANDOM_0_1() * RANGE;CCLOG(&quot;1st-------------&gt;%f&quot;, randData);//2.//随机效果不好，虽然每次进入游戏，值都不一样，但是生成的随机数是递增的，而且相邻两个数之间的变化不大srand(unsigned(time(NULL)));randData = rand() % RANGE;CCLOG(&quot;2rd-------------&gt;%f&quot;, randData);//3.//随机效果较好，每次进入游戏的值都不一样，生成的随机数无规律，相邻的两个数变化较大timeval tv;cocos2d::gettimeofday(&amp;tv, NULL);unsigned long int seed = tv.tv_sec * 1000 + tv.tv_usec / 1000;srand(seed);randData = rand() % RANGE;CCLOG(&quot;3nd-------------&gt;%f&quot;, randData);//4.//C++11的特性，要包含头文件&lt;random&gt;，随机效果不错std::uniform_real_distribution&lt;double&gt; u(0, RANGE);std::default_random_engine e(rand());for (int i = 0; i &lt; 5; i++)&#123; CCLOG(&quot;4th-------------&gt;%f&quot;, u(e));&#125;]]></content>
+      <categories>
+        <category>Cocos2dx</category>
+      </categories>
+      <tags>
+        <tag>cocos2dx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS9http不能正常使用的解决办法]]></title>
+    <url>%2Fposts%2F40531%2F</url>
+    <content type="text"><![CDATA[1.在Info.plist中添加NSAppTransportSecurity类型Dictionary。 2.在NSAppTransportSecurity下添加NSAllowsArbitraryLoads类型Boolean值设为YES。]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo菜鸟教程]]></title>
+    <url>%2Fposts%2F65318%2F</url>
+    <content type="text"><![CDATA[快速开始安装首先登陆github网站，在github上建立一个repository，名字必须为xxx.github.io，xxx为你的账户名 打开控制台，用npm安装hexo（这里需要先安装node.js，如果没有安装的话请先去官网安装）。 npm i -g hexo 安装完成后查看 hexo -v 如果出现版本信息表示安装成功 创建一个hexo项目现在在本地创建一个hexo项目，在项目文件夹下进入cmd命令行模式，输入： hexo init 创建完成后，输入： npm install 安装默认插件完成后，为了支持github，还需要安装另一个插件： npm install hexo-deployer-git --save 然后生成web项目，输入： hexo g 启动服务器预览效果，输入： hexo s -o 浏览器预览访问http://localhost:4000/ 这还只是本地项目，现在要发布到github上面去，我们需要配置项目目录下的_config.yml文件，打开它找到最后一行，我们把github的配置信息填上去。 deploy: type: git repo: git@github.com:dot123/dot123.github.io.git branch: master 发布生成SSH密钥点击查看 在GitHub上添加SSH密钥打开id_rsa.pub，复制全文。点击Add SSH key，粘贴进去。 完成后我们开始发布博客吧！当前路径命令行下输入： hexo d 按照提示输入github的登录名和密码，就可以看到成功信息。 稍等一会就可以输入网址xxx.github.io访问你的博客啦~~~ hexo目录结构. ├── .deploy #需要部署的文件 ├── node_modules #Hexo插件 ├── public #生成的静态网页文件 ├── scaffolds #模板 ├── source #博客正文和其他源文件，404、favicon、CNAME 都应该放在这里 | ├── _drafts #草稿 | └── _posts #文章 ├── themes #主题 ├── _config.yml #全局配置文件 └── package.json 全局配置 _config.yml # Hexo Configuration ## Docs: http://hexo.io/docs/configuration.html ## Source: https://github.com/hexojs/hexo/ # Site #站点信息 title: #标题 subtitle: #副标题 description: #站点描述，给搜索引擎看的 author: #作者 email: #电子邮箱 language: zh-CN #语言 # URL #链接格式 url: #网址 root: / #根目录 permalink: :year/:month/:day/:title/ #文章的链接格式 tag_dir: tags #标签目录 archive_dir: archives #存档目录 category_dir: categories #分类目录 code_dir: downloads/code permalink_defaults: # Directory #目录 source_dir: source #源文件目录 public_dir: public #生成的网页文件目录 # Writing #写作 new_post_name: :title.md #新文章标题 default_layout: post #默认的模板，包括 post、page、photo、draft（文章、页面、照片、草稿） titlecase: false #标题转换成大写 external_link: true #在新选项卡中打开连接 filename_case: 0 render_drafts: false post_asset_folder: false relative_link: false highlight: #语法高亮 enable: true #是否启用 line_number: true #显示行号 tab_replace: # Category &amp; Tag #分类和标签 default_category: uncategorized #默认分类 category_map: tag_map: # Archives 2: 开启分页 1: 禁用分页 0: 全部禁用 archive: 2 category: 2 tag: 2 # Server #本地服务器 port: 4000 #端口号 server_ip: localhost #IP 地址 logger: false logger_format: dev # Date / Time format #日期时间格式 date_format: YYYY-MM-DD #参考http://momentjs.com/docs/#/displaying/format/ time_format: H:mm:ss # Pagination #分页 per_page: 10 #每页文章数，设置成 0 禁用分页 pagination_dir: page # Disqus #Disqus评论，替换为多说 disqus_shortname: # Extensions #拓展插件 theme: landscape-plus #主题 exclude_generator: plugins: #插件，例如生成 RSS 和站点地图的 - hexo-generator-feed - hexo-generator-sitemap # Deployment #部署，将 lmintlcx 改成用户名 deploy: type: git repo: 刚刚github创库地址.git branch: master 注意 配置文件的冒号“:”后面有一个空格 repo: 刚刚github创库地址.git hexo命令行使用常用命令： hexo help #查看帮助 hexo init #初始化一个目录 hexo new &quot;postName&quot; #新建文章 hexo new page &quot;pageName&quot; #新建页面 hexo generate #生成网页，可以在 public 目录查看整个网站的文件 hexo server #本地预览，&apos;Ctrl+C&apos;关闭 hexo deploy #部署.deploy目录 hexo clean #清除缓存，**强烈建议每次执行命令前先清理缓存，每次部署前先删除 .deploy 文件夹** 简写： hexo n == hexo new hexo g == hexo generate hexo s == hexo server hexo d == hexo deploy 新建文章 hexo new &quot;标题&quot; 在 _posts 目录下会生成文件标题.md title: Hello World date: 2015-07-30 07:56:29 #发表日期，一般不改动 categories: hexo #文章文类 tags: [hexo,github] #文章标签，多于一项时用这种格式 --- 正文，使用Markdown语法书写 编辑完后保存，hexo server 预览 hexo部署 执行下列指令即可完成部署 hexo generate hexo deploy 以下提示说明部署成功 [info] Deploy done: git sitemap &amp; rss设置sitemap1.安装hexo的sitemap网站地图生成插件 npm install hexo-generator-sitemap --save npm install hexo-generator-baidu-sitemap --save 2.在你的hexo站点的_config.yml添加下面的代码 # hexo sitemap网站地图 sitemap: path: sitemap.xml baidusitemap: path: baidusitemap.xml 配置成功后，hexo编译时会在hexo站点根目录生成sitemap.xml和baidusitemap.xml其中sitemap.xml适合提交给谷歌搜素引擎，baidusitemap.xml适合提交百度搜索引擎。 设置RSSNexT中RSS有三个设置选项，满足特定的使用场景。更改主题配置文件，设定rss字段的值：false：禁用RSS，不在页面上显示RSS连接。留空：使用 Hexo生成的Feed链接。你可以需要先安装hexo-generator-feed插件。具体的链接地址：适用于已经烧制过 Feed 的情形hexo-generator-feed插件安装命令 npm install hexo-generator-feed --save 主题首页title的优化更改index.swig文件，文件路径是your-hexo-site\themes\next\layout，将下面代码1&#123;% block title %&#125; &#123;&#123; config.title &#125;&#125; &#123;% endblock %&#125; 改成1&#123;% block title %&#125; &#123;&#123; config.title &#125;&#125; - &#123;&#123; theme.description &#125;&#125; &#123;% endblock %&#125; 这时候你的首页标题会更符合网站名称 - 网站描述这习惯。进阶，做了seo优化，把关键词也显示在Title标题里，可改成1&#123;% block title %&#125; &#123;&#123; theme.keywords &#125;&#125; - &#123;&#123; config.title &#125;&#125; - &#123;&#123; theme.description &#125;&#125; &#123;% endblock %&#125; 注意：别堆砌关键字，整个标题一般不超过80个字符，可以通过chinaz的seo综合查询检查。]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+</search>
