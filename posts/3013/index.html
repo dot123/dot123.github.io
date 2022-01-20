@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="DOT123&#39;S BLOG">
 <meta property="og:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE_754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-23T14:38:26.781Z">
+<meta property="og:updated_time" content="2022-01-20T14:23:38.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocosCreator帧同步">
 <meta name="twitter:description" content="浮点数处理1.JavaScript中的Number(double64)遵循IEEE754标准，现代cpu都遵循IEEE_754标准，误差是稳定的。 console.log(0.1+0.2) //不同平台计算结果一样 0.30000000000000004  2.Math.PI和三角函数在不同平台上计算结果不同(iOS误差明显)，因此不能直接使用这些数学库，要使用查表法。 3.使用确定性随机数。 f">
@@ -425,7 +425,8 @@ int main(){
      return 0;
 }
 //输出：0.3Hello World!
-</code></pre>
+</code></pre><p>6.游戏过程中作弊检测。<br>玩家每隔一段时间把所有角色的关键数据加密为MD5上传服务器，服务器进行比对。如果是所有人上传上来的MD5都一样说明所有人的游戏结果都是同步的，如果有人修改了血量那么就会造成游戏不同步自己的MD5和其他人的不一样，服务器可以强行纠正它或者踢掉它。</p>
+
       
     </div>
     

@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交叉其他图片（图">
+<meta name="description" content="1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont或CHAR模式。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交">
 <meta name="keywords" content="性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocosCreator性能优化">
 <meta property="og:url" content="https://g.cocos.dev/posts/60909/index.html">
 <meta property="og:site_name" content="DOT123&#39;S BLOG">
-<meta property="og:description" content="1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交叉其他图片（图">
+<meta property="og:description" content="1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont或CHAR模式。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-07T08:50:30.197Z">
+<meta property="og:updated_time" content="2022-01-20T14:16:02.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocosCreator性能优化">
-<meta name="twitter:description" content="1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交叉其他图片（图">
+<meta name="twitter:description" content="1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。 2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。 3.将频繁创建的对象使用对象池。 4.Label使用BMFont或CHAR模式。 5.减少粒子使用。 6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交">
 
 
 
@@ -392,7 +392,7 @@
         <p>1.H5网页性能优化web服务开启gzip压缩，使用cnd加速下载。</p>
 <p>2.原生平台性能优化使用CocosCreator自带的自动图集配置，安卓使用Etc2格式，iOS使用PVRTC格式，能大幅度优化图片加载速度和内存占用。</p>
 <p>3.将频繁创建的对象使用对象池。</p>
-<p>4.Label使用BMFont。</p>
+<p>4.Label使用BMFont或CHAR模式。</p>
 <p>5.减少粒子使用。</p>
 <p>6.多个使用相同图片（图集）的Sprite对象在同一节点下按顺序排列不要交叉其他图片（图集）的Sprite，否则draw call被打断，draw call上升。</p>
 <p>7.使用Mask组件会打断draw call。</p>
@@ -402,6 +402,8 @@
 <p>11.分帧创建节点。</p>
 <p>12.当节点透明度为0时不会渲染，子节点也不会渲染（Cocos Creator 2.13）。</p>
 <p>13.动静分离节点。</p>
+<p>14.动态树检测技能伤害、AI跳帧执行、伤害帧跳帧检测、伤害飘字合批、在update中不使用cc.v2类似这种创建对象的函数防止gc。</p>
+<p>15.预先计算spine动画缓存和提前加载所使用到的资源。</p>
 <p>###参考文档</p>
 <p>支持 Texture Packer 的 Polygon outline 裁剪，使用 Polygon outline 裁剪后的图集将对每个小图按透明区域精确裁剪为不规则的多边形，将达到类似 Smash Texture 节省图片空间的效果，对渲染性能也有一定提升。该功能无需在 Creator 中进行额外操作，导入图集后即可自动开启。</p>
 <p>从 Cocos Creator 2.0.9 开始，支持将 Label 设为 CHAR 模式，即可实现类似的优化方案。能够以“字”为单位将文本缓存到全局共享的位图中，相同字体样式和字号的每个字符将在全局共享一份缓存。提升纹理利用率的同时，也大大提升了文本刷新时的性能。详见文档<a href="https://docs.cocos.com/creator/2.1/manual/zh/components/label.html#%E6%96%87%E6%9C%AC%E7%BC%93%E5%AD%98%E7%B1%BB%E5%9E%8B%EF%BC%88cache-mode%EF%BC%89" rel="external nofollow noopener noreferrer" target="_blank">[文本缓存类型]</a></p>

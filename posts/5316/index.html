@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="DOT123&#39;S BLOG">
 <meta property="og:description" content="在cocos2d-x/external/lua目录下新建四个文件夹sproto，bitop，lpeg，lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_  #if __cplusplus extern &amp;quot;C&amp;quot; { #">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-21T14:34:16.075Z">
+<meta property="og:updated_time" content="2022-01-20T14:07:29.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2dx-lua集成sproto">
 <meta name="twitter:description" content="在cocos2d-x/external/lua目录下新建四个文件夹sproto，bitop，lpeg，lpack。然后将各自的文件放入其中，为了符合cocos2dx的规范，需要在bitop中建立一个bit.h文件，内容如下: #ifndef __LUA_BITOP_H_ #define __LUA_BITOP_H_  #if __cplusplus extern &amp;quot;C&amp;quot; { #">
@@ -490,7 +490,7 @@ int luaopen_pack(lua_State *L);
 ../../../../external/lua/lpack/lpack.c 
 </code></pre><p>Android支持luajit库，里面已经包含了bit库，所以不用加bit.c了，不然编译的时候会出现多重定义的错误</p>
 <p>总得来说还是很简单的，只需三步：<br>  文件放到cocos2d-x/external/lua目录下<br>  修改lua_extensions.c，包含相关文件<br>  修改Android.mk做Android支持</p>
-<h4 id="项目代码https-github-com-dot123-cocos2d-lua-sproto"><a href="#项目代码https-github-com-dot123-cocos2d-lua-sproto" class="headerlink" title="项目代码https://github.com/dot123/cocos2d-lua-sproto"></a>项目代码<a href="https://github.com/dot123/cocos2d-lua-sproto" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/cocos2d-lua-sproto</a></h4>
+<h4 id="项目代码https-github-com-dot123-cocos2d-lua-sproto-git"><a href="#项目代码https-github-com-dot123-cocos2d-lua-sproto-git" class="headerlink" title="项目代码https://github.com/dot123/cocos2d-lua-sproto.git"></a>项目代码<a href="https://github.com/dot123/cocos2d-lua-sproto.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/cocos2d-lua-sproto.git</a></h4>
       
     </div>
     
@@ -723,7 +723,7 @@ int luaopen_pack(lua_State *L);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目代码https-github-com-dot123-cocos2d-lua-sproto"><span class="nav-number">1.</span> <span class="nav-text">项目代码https://github.com/dot123/cocos2d-lua-sproto</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目代码https-github-com-dot123-cocos2d-lua-sproto-git"><span class="nav-number">1.</span> <span class="nav-text">项目代码https://github.com/dot123/cocos2d-lua-sproto.git</span></a></li></ol></div>
             
 
           </div>
