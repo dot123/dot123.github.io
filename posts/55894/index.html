@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.配置说明 type Config struct {     Configs      string     Txt          string">
+<meta name="description" content="excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.支持数据类型有int、 float、 string、 auto。 6.配置说明 12345678910111213type Config stru">
 <meta name="keywords" content="Excel导表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Excel导表工具">
 <meta property="og:url" content="https://g.cocos.dev/posts/55894/index.html">
 <meta property="og:site_name" content="DOT123&#39;S BLOG">
-<meta property="og:description" content="excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.配置说明 type Config struct {     Configs      string     Txt          string">
+<meta property="og:description" content="excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.支持数据类型有int、 float、 string、 auto。 6.配置说明 12345678910111213type Config stru">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-23T14:43:09.813Z">
+<meta property="og:updated_time" content="2022-02-26T09:05:18.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Excel导表工具">
-<meta name="twitter:description" content="excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.配置说明 type Config struct {     Configs      string     Txt          string">
+<meta name="twitter:description" content="excelTool1.excel导表工具支持导出txt、lua、json文件。 2.支持格式参考测试例子.xlsx。 3.开头#号注释。 4.config.json可以配置导出路径如不填则不导出该文件。 5.fileList方便读取所有导出的文件。 6.支持数据类型有int、 float、 string、 auto。 6.配置说明 12345678910111213type Config stru">
 
 
 
@@ -394,20 +394,10 @@
 <p>3.开头#号注释。</p>
 <p>4.config.json可以配置导出路径如不填则不导出该文件。</p>
 <p>5.fileList方便读取所有导出的文件。</p>
+<p>6.支持数据类型有int、 float、 string、 auto。</p>
 <p>6.配置说明</p>
-<pre><code>type Config struct {
-    Configs      string
-    Txt          string
-    JSON         string
-    Lua          string
-    FieldLine    int    //字段key开始行
-    DataLine     int    //有效配置开始行
-    Comma        string //txt分隔符,默认是制表符
-    Comment      string //excel注释符
-    Linefeed     string //txt换行符
-    UseSheetName bool   //使用工作表名为文件输出名
-}
-</code></pre><h4 id="项目代码https-github-com-dot123-excelTool-git"><a href="#项目代码https-github-com-dot123-excelTool-git" class="headerlink" title="项目代码https://github.com/dot123/excelTool.git"></a>项目代码<a href="https://github.com/dot123/excelTool.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/excelTool.git</a></h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">type Config struct &#123;</span><br><span class="line">	Configs      string</span><br><span class="line">	Txt          string</span><br><span class="line">	JSON         string</span><br><span class="line">	Lua          string</span><br><span class="line">	FieldLine    int    //字段key开始行</span><br><span class="line">	DataLine     int    //有效配置开始行</span><br><span class="line">	TypeLine     int    //类型配置开始行</span><br><span class="line">	Comma        string //txt分隔符,默认是制表符</span><br><span class="line">	Comment      string //excel注释符</span><br><span class="line">	Linefeed     string //txt换行符</span><br><span class="line">	UseSheetName bool   //使用工作表名为文件输出名</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="项目代码https-github-com-dot123-excelTool-git"><a href="#项目代码https-github-com-dot123-excelTool-git" class="headerlink" title="项目代码https://github.com/dot123/excelTool.git"></a>项目代码<a href="https://github.com/dot123/excelTool.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/dot123/excelTool.git</a></h4>
       
     </div>
     
